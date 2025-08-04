@@ -1,0 +1,51 @@
+site_name: theoneultra 个人网站
+site_url: https://theoneultra.github.io
+repo_url: https://github.com/theoneultra/theoneultra.github.io
+nav:
+- Home:
+  - Home1: index.md
+- About:
+  - About Me: about.md  
+- Blog:
+  - Blog: blog.md
+- Projects:
+  - Projects: projects.md
+
+  
+theme:
+  name: material
+  features:
+    - navigation.top
+    - navigation.tabs
+    - search.highlight
+  palette:
+
+    # Toggle light mode
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+
+    # Toggle dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+  icon:
+    logo: material/github
+  
+  language: zh
+
+copyright: "Copyright © 2025 theoneultra. All rights reserved."
+
+extra:
+  alternate:
+
+    # Switch to English
+    - name: English
+      link: <theoneultra.github.io>/en/
+      lang: en
