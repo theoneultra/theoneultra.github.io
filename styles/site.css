@@ -2,8 +2,8 @@
   --bg-0: #020914;
   --bg-1: #05152f;
   --bg-2: #0a2d66;
-  --surface: rgba(8, 25, 54, 0.68);
-  --surface-strong: rgba(9, 30, 66, 0.82);
+  --surface: rgba(12, 33, 70, 0.52);
+  --surface-strong: rgba(10, 29, 63, 0.72);
   --ink: #eaf3ff;
   --muted: #a8bfde;
   --line: rgba(140, 178, 230, 0.28);
@@ -136,11 +136,23 @@ body {
 .hero,
 .article-card {
   margin-top: 2.4rem;
-  background: linear-gradient(160deg, rgba(14, 39, 82, 0.72), rgba(7, 25, 53, 0.9));
+  background:
+    radial-gradient(120% 140% at 8% 0%, rgba(164, 208, 255, 0.22) 0%, rgba(164, 208, 255, 0.05) 34%, rgba(164, 208, 255, 0) 62%),
+    linear-gradient(155deg, rgba(18, 46, 96, 0.62) 0%, rgba(12, 35, 74, 0.62) 46%, rgba(8, 24, 53, 0.72) 100%);
+  background-blend-mode: screen, normal;
   border: 1px solid var(--line);
   border-radius: 18px;
   padding: 2rem;
+  backdrop-filter: blur(16px) saturate(140%);
   box-shadow: 0 28px 60px rgba(1, 6, 16, 0.45);
+  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.hero:hover,
+.article-card:hover {
+  transform: scale(1.012);
+  border-color: rgba(171, 205, 250, 0.62);
+  box-shadow: 0 32px 68px rgba(1, 6, 16, 0.52);
 }
 
 .hero-thin {
@@ -165,12 +177,10 @@ h1 {
 
 .headline-gradient {
   color: transparent;
-  background-image: linear-gradient(110deg, #f8fbff 10%, #b4d1ff 45%, #78e5ff 90%);
-  background-size: 220% auto;
+  background-image: linear-gradient(108deg, #f8fbff 12%, #bfd8ff 48%, #7ce3ff 90%);
   background-clip: text;
   -webkit-background-clip: text;
-  text-shadow: 0 0 28px rgba(123, 183, 255, 0.22);
-  animation: shimmer 9s linear infinite;
+  text-shadow: 0 0 22px rgba(126, 190, 255, 0.18);
 }
 
 .lead {
@@ -178,6 +188,10 @@ h1 {
   color: #d8e7fc;
   max-width: 68ch;
   font-size: 1.04rem;
+}
+
+.lead-muted {
+  color: #bfd4f2;
 }
 
 .hero-actions {
@@ -222,18 +236,22 @@ h1 {
 .article-link {
   text-decoration: none;
   color: inherit;
-  background: linear-gradient(145deg, rgba(13, 38, 82, 0.74), rgba(6, 21, 47, 0.88));
+  background:
+    radial-gradient(140% 110% at 8% 0%, rgba(166, 210, 255, 0.18) 0%, rgba(166, 210, 255, 0.05) 40%, rgba(166, 210, 255, 0) 70%),
+    linear-gradient(150deg, rgba(15, 42, 90, 0.7) 0%, rgba(8, 25, 56, 0.82) 100%);
+  background-blend-mode: screen, normal;
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 1rem 1.1rem;
   display: grid;
   gap: 0.2rem;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
 }
 
 .article-link:hover {
-  transform: translateY(-2px);
+  transform: scale(1.01);
   border-color: rgba(165, 202, 251, 0.58);
+  box-shadow: 0 20px 34px rgba(2, 10, 24, 0.38);
 }
 
 .article-title {
@@ -246,18 +264,35 @@ h1 {
   font-size: 0.9rem;
 }
 
+.resize-tip {
+  margin: 0.8rem 0 0;
+  color: #9eb9df;
+  font-size: 0.88rem;
+}
+
 .pdf-wrap {
   margin-top: 1.3rem;
   border: 1px solid var(--line);
   background: var(--surface-strong);
   border-radius: 12px;
-  overflow: hidden;
+  height: min(70vh, 820px);
+  min-height: 360px;
+  max-height: 86vh;
+  resize: vertical;
+  overflow: auto;
+  transition: transform 0.22s ease, border-color 0.22s ease;
+}
+
+.pdf-wrap:hover {
+  transform: scale(1.005);
+  border-color: rgba(171, 205, 250, 0.56);
 }
 
 .pdf-wrap iframe {
   display: block;
   width: 100%;
-  height: min(70vh, 820px);
+  height: 100%;
+  min-height: 350px;
   border: 0;
 }
 
@@ -294,12 +329,6 @@ h1 {
   }
 }
 
-@keyframes shimmer {
-  to {
-    background-position: 200% center;
-  }
-}
-
 @keyframes drift {
   to {
     transform: translate3d(38px, -26px, 0) scale(1.04);
@@ -326,7 +355,22 @@ h1 {
     flex-wrap: wrap;
   }
 
-  .pdf-wrap iframe {
+  .pdf-wrap {
     height: 62vh;
+    min-height: 260px;
+    max-height: none;
+    resize: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-aurora,
+  .reveal {
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }
