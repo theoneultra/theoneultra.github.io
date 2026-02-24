@@ -3,40 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>new article | theoneultra</title>
-  <meta name="description" content="new article  (按日期排序）" />
-  <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg" type="image/svg+xml" />
-  <link rel="icon" href="https://github.githubassets.com/favicons/favicon.png" type="image/png" />
+  <title>Articles | theoneultra</title>
+  <meta name="description" content="article 列表页" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/site.css" />
 </head>
 <body>
-  <div class="bg-lattice"></div>
-  <div class="bg-halo bg-halo-a"></div>
-  <div class="bg-halo bg-halo-b"></div>
+  <div class="site-shell">
+    <header class="gov-header">
+      <div class="container header-row">
+        <a class="brand" href="index.html">THEONEULTRA.GITHUB.IO</a>
+        <nav class="main-nav" aria-label="主导航">
+          <a href="index.html">Home</a>
+          <a href="running.html" class="active">Articles</a>
+        </nav>
+      </div>
+    </header>
 
-  <header class="site-header">
-    <div class="top-band"></div>
-    <div class="wrap nav-row">
-      <a class="brand" href="index.html">theoneultra的个人主页</a>
-      <nav>
-        <a href="index.html">about me</a>
-        <a href="running.html" class="active">new article</a>
-      </nav>
-    </div>
-  </header>
+    <main class="container reveal">
+      <section class="hero hero-thin">
+        <p class="kicker">Article</p>
+        <h1>article</h1>
+      </section>
 
-  <main class="wrap reveal">
-    <section class="hero slim">
-      <h1>new article  (按日期排序）</h1>
-    </section>
+      <section class="article-list reveal delay-1" aria-label="文章列表">
+        <a class="article-link" href="articles/welcome.html">
+          <span class="article-title">关于如何走出舒适区</span>
+          <span class="article-meta">查看文章与 PDF</span>
+        </a>
+      </section>
+    </main>
 
-    <section class="article-list reveal delay-1">
-      <a class="article-link" href="articles/welcome.html">theoneultra的个人主页</a>
-    </section>
-  </main>
+    <footer class="gov-footer">
+      <div class="container footer-row">
+        <span>copyright c theoneultra</span>
+        <span>All Rights Reserved</span>
+      </div>
+    </footer>
+  </div>
 
   <script src="scripts/site.js"></script>
 </body>
