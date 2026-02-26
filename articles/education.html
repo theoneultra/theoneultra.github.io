@@ -1,14 +1,14 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Articles | theoneultra</title>
-  <meta name="description" content="article 列表页" />
+  <title>对教育环境和社会的思考 | theoneultra</title>
+  <meta name="description" content="对教育环境和社会的思考 - 文章与 PDF" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/site.css" />
+  <link rel="stylesheet" href="../styles/site.css" />
 </head>
 <body>
   <div class="bg-canvas" aria-hidden="true"></div>
@@ -19,30 +19,29 @@
   <div class="site-shell">
     <header class="gov-header">
       <div class="container header-row">
-        <a class="brand" href="index.html">THEONEULTRA.GITHUB.IO</a>
+        <a class="brand" href="../index.html">THEONEULTRA.GITHUB.IO</a>
         <nav class="main-nav" aria-label="主导航">
-          <a href="index.html">Home</a>
-          <a href="running.html" class="active">Articles</a>
+          <a href="../index.html">Home</a>
+          <a href="../running.html" class="active">Articles</a>
         </nav>
       </div>
     </header>
 
     <main class="container reveal">
-      <section class="hero hero-thin">
+      <article class="article-card">
         <p class="kicker">Article</p>
-        <h1 class="headline-gradient">article</h1>
-      </section>
+        <h1 class="headline-gradient">对教育环境和社会的思考</h1>
+        <p>这篇文章已内嵌在线预览，可直接滚动阅读，也可下载保存。</p>
 
-      <section class="article-list reveal delay-1" aria-label="文章列表">
-        <a class="article-link" href="articles/education.html">
-          <span class="article-title">对教育环境和社会的思考</span>
-          <span class="article-meta">查看文章与 PDF</span>
-        </a>
-        <a class="article-link" href="articles/welcome.html">
-          <span class="article-title">关于如何走出舒适区</span>
-          <span class="article-meta">查看文章与 PDF</span>
-        </a>
-      </section>
+        <div class="hero-actions">
+          <a class="btn" href="%E5%AF%B9%E6%95%99%E8%82%B2%E7%8E%AF%E5%A2%83%E5%92%8C%E7%A4%BE%E4%BC%9A%E7%9A%84%E6%80%9D%E8%80%83.pdf" download>下载 PDF</a>
+        </div>
+        <p class="resize-tip">可拖动预览区域右下角，调整 PDF 视窗大小。</p>
+
+        <div class="pdf-wrap">
+          <iframe src="%E5%AF%B9%E6%95%99%E8%82%B2%E7%8E%AF%E5%A2%83%E5%92%8C%E7%A4%BE%E4%BC%9A%E7%9A%84%E6%80%9D%E8%80%83.pdf" title="对教育环境和社会的思考 PDF"></iframe>
+        </div>
+      </article>
     </main>
 
     <footer class="gov-footer">
@@ -53,6 +52,6 @@
     </footer>
   </div>
 
-  <script src="scripts/site.js"></script>
+  <script src="../scripts/site.js"></script>
 </body>
 </html>
