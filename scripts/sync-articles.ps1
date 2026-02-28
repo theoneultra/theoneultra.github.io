@@ -27,7 +27,9 @@ function Get-ShortHash {
 function Build-ArticleHtml {
   param(
     [string]$Title,
-    [string]$PdfEncoded
+    [string]$PdfEncoded,
+    [string]$PublishDisplay,
+    [string]$PublishIso
   )
 
   $titleHtml = Escape-Html $Title
@@ -68,6 +70,7 @@ function Build-ArticleHtml {
       <article class="article-card">
         <p class="kicker">Article</p>
         <h1 class="headline-gradient">$titleHtml</h1>
+        <p class="article-pubdate"><time datetime="$PublishIso">发布日期：$PublishDisplay</time></p>
         <p>这篇文章已内嵌在线预览，可直接滚动阅读，也可下载保存。</p>
 
         <div class="hero-actions">
@@ -98,7 +101,9 @@ function Build-ArticleHtml {
 function Build-RunningEntry {
   param(
     [string]$PageFile,
-    [string]$Title
+    [string]$Title,
+    [string]$PublishDisplay,
+    [string]$PublishIso
   )
 
   $titleHtml = Escape-Html $Title
@@ -107,9 +112,20 @@ function Build-RunningEntry {
   return @(
     "        <a class=""article-link"" href=""$pageHref"">"
     "          <span class=""article-title"">$titleHtml</span>"
-    "          <span class=""article-meta"">查看文章与 PDF</span>"
+    "          <span class=""article-meta-row"">"
+    "            <span class=""article-meta"">查看文章与 PDF</span>"
+    "            <time class=""article-date"" datetime=""$PublishIso"">发布日期：$PublishDisplay</time>"
+    "          </span>"
     "        </a>"
   ) -join "`r`n"
+}
+
+function Get-PublishDateParts {
+  param([datetime]$Date)
+  return [pscustomobject]@{
+    Iso = $Date.ToString("yyyy-MM-dd")
+    Display = "$($Date.Year).$($Date.Month).$($Date.Day)"
+  }
 }
 
 function Get-PagePdfName {
@@ -195,6 +211,7 @@ foreach ($pdf in $pdfFiles) {
   $pdfName = $pdf.Name
   $title = [System.IO.Path]::GetFileNameWithoutExtension($pdfName)
   $pdfEncoded = [System.Uri]::EscapeDataString($pdfName)
+  $publish = Get-PublishDateParts -Date $pdf.LastWriteTime
 
   if ($pdfToPages.ContainsKey($pdfName) -and $pdfToPages[$pdfName].Count -gt 0) {
     $selected = @($pdfToPages[$pdfName] | Sort-Object `
@@ -213,7 +230,7 @@ foreach ($pdf in $pdfFiles) {
   }
 
   $pagePath = Join-Path $articlesDir $pageFile
-  $pageHtml = Build-ArticleHtml -Title $title -PdfEncoded $pdfEncoded
+  $pageHtml = Build-ArticleHtml -Title $title -PdfEncoded $pdfEncoded -PublishDisplay $publish.Display -PublishIso $publish.Iso
 
   if (-not $DryRun) {
     Set-Content -Path $pagePath -Value $pageHtml -Encoding utf8
@@ -246,7 +263,8 @@ $entries = New-Object System.Collections.ArrayList
 foreach ($pdf in $pdfFiles) {
   $title = [System.IO.Path]::GetFileNameWithoutExtension($pdf.Name)
   $pageFile = $resolvedPages[$pdf.Name]
-  [void]$entries.Add((Build-RunningEntry -PageFile $pageFile -Title $title))
+  $publish = Get-PublishDateParts -Date $pdf.LastWriteTime
+  [void]$entries.Add((Build-RunningEntry -PageFile $pageFile -Title $title -PublishDisplay $publish.Display -PublishIso $publish.Iso))
 }
 
 $entryBlock = ""

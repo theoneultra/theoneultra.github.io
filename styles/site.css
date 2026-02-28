@@ -264,10 +264,29 @@ h1 {
   font-size: 0.9rem;
 }
 
+.article-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
 .resize-tip {
   margin: 0.8rem 0 0;
   color: #9eb9df;
   font-size: 0.88rem;
+}
+
+.article-pubdate {
+  margin: -0.15rem 0 0.8rem;
+  color: #b7cdea;
+  font-size: 0.9rem;
+}
+
+.article-date {
+  color: #9eb7db;
+  font-size: 0.85rem;
+  white-space: nowrap;
 }
 
 .pdf-wrap {
@@ -353,6 +372,12 @@ h1 {
 
   .main-nav {
     flex-wrap: wrap;
+  }
+
+  .article-meta-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
   }
 
   .pdf-wrap {
