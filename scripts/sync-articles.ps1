@@ -241,14 +241,14 @@ foreach ($pdf in $pdfFiles) {
 }
 
 $runningContent = Get-Content -Raw -Path $runningPath
-$sectionPattern = '(?s)(<section class="article-list reveal delay-1" aria-label="文章列表">\r?\n)(.*?)(\r?\n[ \t]*</section>)'
+$sectionPattern = '(?s)(<section\b(?=[^>]*\bclass="[^"]*\barticle-list\b[^"]*")(?=[^>]*\baria-label="文章列表")[^>]*>\r?\n)(.*?)(\r?\n[ \t]*</section>)'
 $sectionMatch = [regex]::Match($runningContent, $sectionPattern)
 if (-not $sectionMatch.Success) {
   throw "未能在 running.html 中定位文章列表区域。"
 }
 
 $existingInner = $sectionMatch.Groups[2].Value
-$existingEntryCount = [regex]::Matches($existingInner, '<a class="article-link" href="[^"]+">').Count
+$existingEntryCount = [regex]::Matches($existingInner, '<a\b[^>]*\bclass="[^"]*\barticle-link\b[^"]*"[^>]*>').Count
 
 # Phase 1.5: clear running entries (delete first)
 $clearedRunning = [regex]::Replace(
