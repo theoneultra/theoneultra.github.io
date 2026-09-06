@@ -5,8 +5,12 @@
       "label": "日报：安装依赖",
       "type": "shell",
       "command": "bundle",
-      "args": ["install"],
-      "options": { "cwd": "${workspaceFolder}" },
+      "args": [
+        "install"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "problemMatcher": []
     },
     {
@@ -15,43 +19,79 @@
       "command": "powershell.exe",
       "args": [
         "-NoProfile",
-        "-ExecutionPolicy", "Bypass",
-        "-File", "${workspaceFolder}/scripts/new-post.ps1",
-        "-Title", "${input:postTitle}",
-        "-Slug", "${input:postSlug}",
-        "-Category", "${input:postCategory}",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/new-post.ps1",
+        "-Title",
+        "${input:postTitle}",
+        "-Slug",
+        "${input:postSlug}",
+        "-Category",
+        "${input:postCategory}",
         "-Open"
       ],
-      "options": { "cwd": "${workspaceFolder}" },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "problemMatcher": [],
-      "linux": { "command": "pwsh" },
-      "osx": { "command": "pwsh" }
+      "linux": {
+        "command": "pwsh"
+      },
+      "osx": {
+        "command": "pwsh"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
     },
     {
       "label": "日报：本地预览",
       "type": "shell",
       "command": "bundle",
       "args": [
-        "exec", "jekyll", "serve",
-        "--livereload", "--unpublished",
-        "--host", "127.0.0.1"
+        "exec",
+        "jekyll",
+        "serve",
+        "--livereload",
+        "--unpublished",
+        "--host",
+        "127.0.0.1"
       ],
-      "options": { "cwd": "${workspaceFolder}" },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "isBackground": true,
       "problemMatcher": [],
-      "presentation": { "reveal": "always", "panel": "dedicated" },
-      "runOptions": { "instanceLimit": 1 }
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
     },
     {
       "label": "日报：构建站点",
       "type": "shell",
       "command": "bundle",
-      "args": ["exec", "jekyll", "build", "--trace"],
+      "args": [
+        "exec",
+        "jekyll",
+        "build",
+        "--trace"
+      ],
       "options": {
         "cwd": "${workspaceFolder}",
-        "env": { "JEKYLL_ENV": "production" }
+        "env": {
+          "JEKYLL_ENV": "production"
+        }
       },
-      "group": { "kind": "build", "isDefault": true },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
       "problemMatcher": []
     }
   ],
