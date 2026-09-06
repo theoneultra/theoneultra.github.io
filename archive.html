@@ -1,0 +1,13 @@
+---
+layout: default
+title: 文章归档
+permalink: /archive/
+section: archive
+---
+<header class="page-heading"><span class="eyebrow">THE ARCHIVE</span><h1>每一篇，都是时间的注脚。</h1><p>这里收录了全部 {{ site.posts.size }} 篇文章。从一个问题出发，重新遇见一个想法。</p></header>
+<section class="archive-section" data-archive>
+  <div class="archive-search"><label for="archive-query">查找文章</label><input type="search" id="archive-query" placeholder="标题、分类、标签……" autocomplete="off"><span data-archive-count role="status">{{ site.posts.size }} 篇文章</span></div>
+  {% assign grouped = site.posts | group_by_exp: 'post', "post.date | date: '%Y'" %}
+  {% for year in grouped %}<section class="archive-year" data-archive-year><h2>{{ year.name }} <span>YEAR IN WORDS</span></h2>{% for post in year.items %}{% assign category_key = post.categories | first %}<article class="archive-row" data-archive-row data-search-text="{{ post.title | escape }} {{ post.summary | escape }} {{ post.tags | join: ' ' | escape }} {{ category_key }} {{ site.category_labels[category_key] }}"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%m.%d' }}</time><span class="category-label">{{ site.category_labels[category_key] | default: category_key }}</span><h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3><span class="archive-reading">{{ post.reading_time | default: 2 }} 分钟</span><span aria-hidden="true">↗</span></article>{% endfor %}</section>{% endfor %}
+  <p class="empty-state" data-archive-empty hidden>没有找到相关文章，试试更短的关键词。</p>
+</section>

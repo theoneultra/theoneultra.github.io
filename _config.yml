@@ -1,0 +1,60 @@
+title: HXY DAILY
+title_zh: 亦弦日报
+description: 一份关于物理、科技与日常的个人日报。保持好奇，记录思考。
+url: https://theoneultra.github.io
+baseurl: ""
+lang: zh-CN
+timezone: Asia/Shanghai
+author: Huang Yixian
+
+permalink: /:categories/:year/:month/:day/:title/
+markdown: kramdown
+highlighter: rouge
+future: false
+strict_front_matter: true
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+
+category_labels:
+  physics: 物理
+  technology: 科技
+  life: 随笔
+  fiction: 虚构
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      author: Huang Yixian
+      featured: false
+      breaking: false
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+feed:
+  path: feed.xml
+  posts_limit: 30
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - docs
+  - templates
+  - scripts
+  - vendor
+  - .bundle
+  - .github
+  - .vscode
+  - .jekyll-cache
+  - .sass-cache
+  - node_modules
+  - package.json
+  - package-lock.json

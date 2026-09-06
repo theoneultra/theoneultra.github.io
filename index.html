@@ -1,51 +1,54 @@
-﻿<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>theoneultra 个人主页</title>
-  <meta name="description" content="theoneultra个人主页，专注物理与写作内容。" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/site.css" />
-</head>
-<body>
-  <div class="bg-canvas" aria-hidden="true"></div>
-  <div class="bg-grid" aria-hidden="true"></div>
-  <div class="bg-aurora bg-aurora-a" aria-hidden="true"></div>
-  <div class="bg-aurora bg-aurora-b" aria-hidden="true"></div>
-
-  <div class="site-shell">
-    <header class="gov-header">
-      <div class="container header-row">
-        <a class="brand" href="index.html">THEONEULTRA.GITHUB.IO</a>
-        <nav class="main-nav" aria-label="主导航">
-          <a href="index.html" class="active">Home</a>
-          <a href="running.html">Articles</a>
-        </nav>
+---
+layout: default
+home: true
+description: "亦弦日报：从宇宙的尺度到日常的细节。关于物理、科技、生活的个人观察与独立书写。"
+---
+{% assign featured = site.posts | where: 'featured', true %}
+{% if featured.size == 0 %}{% assign featured = site.posts | slice: 0, 3 %}{% endif %}
+{% assign breaking = site.posts | where: 'breaking', true | first %}
+{% if breaking %}<div class="breaking-strip"><span class="breaking-label">编辑精选</span><a href="{{ breaking.url | relative_url }}">{{ breaking.title | escape }} <span aria-hidden="true">↗</span></a><span class="breaking-note">慢一点阅读，多一点思考。</span></div>{% endif %}
+<section class="front-page" aria-labelledby="front-page-heading">
+  <div class="section-heading front-heading"><h1 id="front-page-heading">今日视野 <span>THE FRONT PAGE</span></h1><span class="edition-number">一份观察世界的切片 <span aria-hidden="true">✳</span></span></div>
+  <div class="lead-grid">
+    {% if featured.size > 0 %}
+    <div class="carousel" data-carousel role="region" aria-roledescription="轮播" aria-label="精选文章">
+      <div class="slides">
+        {% for post in featured limit: 5 %}{% assign category_key = post.categories | first %}
+        <article class="slide{% if forloop.first %} is-active{% endif %}" data-slide {% unless forloop.first %}hidden{% endunless %} role="group" aria-roledescription="幻灯片" aria-label="{{ forloop.index }} / {{ featured.size | at_most: 5 }}">
+          {% if post.image and post.image != '' %}<img class="hero-image" src="{{ post.image | relative_url }}" alt="{{ post.image_alt | default: post.title | escape }}" width="1672" height="941" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>{% endif %}
+          <div class="slide-shade"></div>
+          <div class="hero-topline"><span>封面故事 <span> / {{ site.category_labels[category_key] | default: category_key }}</span></span><span class="hero-star" aria-hidden="true">✳</span></div>
+          <div class="slide-content"><span class="eyebrow">{{ category_key | upcase }} &amp; PERSPECTIVES</span><h2><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2><p>{{ post.summary | escape }}</p><div class="hero-byline"><span>{{ post.author | default: site.author | escape }} <span class="meta-dot">·</span> {{ post.date | date: '%Y.%m.%d' }}</span><a href="{{ post.url | relative_url }}" aria-label="阅读：{{ post.title | escape }}">阅读全文 <span aria-hidden="true">↗</span></a></div></div>
+        </article>
+        {% endfor %}
       </div>
-    </header>
-
-    <main>
-      <section class="hero container reveal">
-        <p class="kicker">Personal Site</p>
-        <h1 class="headline-gradient">theoneultra个人主页</h1>
-        <p class="lead lead-muted">专注物理与写作的个人站点。</p>
-        <div class="hero-actions">
-          <a class="btn" href="running.html">进入 article</a>
-        </div>
-      </section>
-    </main>
-
-    <footer class="gov-footer">
-      <div class="container footer-row">
-        <span>Copyright © 2026 theoneultra. All rights reserved.</span>
-        <span>未经授权，禁止转载或用于商业用途。</span>
+      <div class="carousel-controls" {% if featured.size < 2 %}hidden{% endif %}>
+        <span class="carousel-count"><strong data-slide-current>01</strong> / {{ featured.size | at_most: 5 | prepend: '0' }}</span>
+        <div class="carousel-dots" aria-label="选择精选文章">{% for post in featured limit: 5 %}<button type="button" data-slide-to="{{ forloop.index0 }}" aria-label="显示第 {{ forloop.index }} 篇：{{ post.title | escape }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"></button>{% endfor %}</div>
+        <div class="carousel-arrows"><button type="button" data-carousel-pause aria-label="暂停自动轮播">Ⅱ</button><button type="button" data-carousel-prev aria-label="上一篇精选">←</button><button type="button" data-carousel-next aria-label="下一篇精选">→</button></div>
       </div>
-    </footer>
+    </div>
+    {% else %}<div class="empty-state"><h2>新的观察，即将开始。</h2><p>第一篇文章发布后，会出现在这里。</p></div>{% endif %}
+    <aside class="edit-column" aria-labelledby="edit-heading"><div class="small-section-heading"><h2 id="edit-heading">此刻关注</h2><span>THE EDIT</span></div>
+      {% assign side_posts = site.posts | where_exp: 'post', 'post.featured == true' | slice: 1, 2 %}
+      {% if side_posts.size == 0 %}{% assign side_posts = site.posts | slice: 0, 2 %}{% endif %}
+      {% for post in side_posts %}{% assign category_key = post.categories | first %}<article class="edit-card"><a class="edit-image" href="{{ post.url | relative_url }}" tabindex="-1" aria-hidden="true">{% if post.image and post.image != '' %}<img src="{{ post.image | relative_url }}" alt="" width="640" height="360" loading="lazy">{% endif %}</a><div class="card-meta"><span class="category-label">{{ site.category_labels[category_key] | default: category_key }}</span><span>{{ post.reading_time | default: 2 }} 分钟阅读</span></div><h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3></article>{% endfor %}
+    </aside>
   </div>
-
-  <script src="scripts/site.js"></script>
-</body>
-</html>
+</section>
+<div class="news-layout">
+  <section class="latest-section" aria-labelledby="latest-heading" id="latest" data-filter-section>
+    <div class="section-heading"><h2 id="latest-heading">新鲜出炉 <span>LATEST STORIES</span></h2><a class="small-link" href="{{ '/archive/' | relative_url }}">全部文章 ↗</a></div>
+    <div class="filter-bar" role="group" aria-label="按分类筛选最新文章"><button type="button" class="is-active" data-filter="all" aria-pressed="true">全部</button>{% for category in site.category_labels %}<button type="button" data-filter="{{ category[0] }}" aria-pressed="false">{{ category[1] }}</button>{% endfor %}<span class="filter-count" data-filter-count role="status">{{ site.posts.size }} 篇文章</span></div>
+    <div class="news-grid">{% for post in site.posts %}{% include card.html post=post %}{% endfor %}</div>
+    <p class="filter-empty" data-filter-empty hidden>这个栏目还在酝酿中，先看看其他文章吧。</p>
+    <a class="archive-link" href="{{ '/archive/' | relative_url }}">去往文章归档 <span aria-hidden="true">→</span></a>
+  </section>
+  <aside class="reading-sidebar">
+    <section aria-labelledby="reading-heading"><div class="small-section-heading"><h2 id="reading-heading">值得一读</h2><span>READING LIST</span></div><ol class="reading-list">{% for post in site.posts limit: 4 %}{% assign category_key = post.categories | first %}<li><span class="reading-number">0{{ forloop.index }}</span><div><span class="category-label">{{ site.category_labels[category_key] | default: category_key }}</span><h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3></div></li>{% endfor %}</ol></section>
+    <section class="about-card"><span class="eyebrow">A NOTE FROM THE EDITOR</span><span class="about-asterisk" aria-hidden="true">✳</span><h2>世界很大，<br>好奇心也是。</h2><p>这里是 Huang Yixian 的个人文字空间。读一点物理，想一点科技，也记录生活里那些微小而具体的时刻。</p><a href="{{ '/about/' | relative_url }}">认识这份日报 <span aria-hidden="true">↗</span></a></section>
+    <a class="rss-card" href="{{ '/feed.xml' | relative_url }}"><span class="rss-icon" aria-hidden="true">◔</span><div><strong>让好奇心，定期抵达。</strong><span>通过 RSS 订阅最新文章</span></div><span aria-hidden="true">↗</span></a>
+  </aside>
+</div>
+<section class="category-digest" aria-label="分类速览">{% assign digest_keys = 'physics,technology,life' | split: ',' %}{% for key in digest_keys %}<div class="digest-column"><div class="small-section-heading"><h2>{{ site.category_labels[key] }} <span>{{ key | upcase }}</span></h2><a href="{{ '/categories/' | relative_url }}#{{ key }}" aria-label="查看全部{{ site.category_labels[key] }}文章">↗</a></div>{% for post in site.categories[key] limit: 2 %}<a class="digest-story" href="{{ post.url | relative_url }}"><span>{{ post.date | date: '%m.%d' }}</span><h3>{{ post.title | escape }}</h3></a>{% endfor %}</div>{% endfor %}</section>
+<div class="closing-note"><span aria-hidden="true">✳</span><p>把问题留给世界，把观察写成日常。</p><span>STAY CURIOUS.</span></div>

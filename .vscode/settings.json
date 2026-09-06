@@ -1,0 +1,24 @@
+{
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.exclude": {
+    "**/_site": true,
+    "**/.jekyll-cache": true,
+    "**/.sass-cache": true,
+    "**/vendor": true
+  },
+  "search.exclude": {
+    "**/_site/**": true,
+    "**/.jekyll-cache/**": true,
+    "**/vendor/**": true
+  },
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": false,
+    "files.trimTrailingWhitespace": false
+  }
+}

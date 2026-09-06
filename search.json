@@ -1,0 +1,9 @@
+---
+layout: null
+permalink: /search.json
+---
+[
+{% for post in site.posts %}{% assign category_key = post.categories | first %}
+  {"title":{{ post.title | jsonify }},"url":{{ post.url | relative_url | jsonify }},"summary":{{ post.summary | default: '' | jsonify }},"category":{{ site.category_labels[category_key] | default: category_key | jsonify }},"tags":{{ post.tags | jsonify }},"date":{{ post.date | date: '%Y.%m.%d' | jsonify }}}{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]

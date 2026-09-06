@@ -1,0 +1,12 @@
+{% assign article = include.post %}
+{% assign category_key = article.categories | first %}
+<article class="news-card" data-category="{{ category_key }}">
+  <a class="card-image-link" href="{{ article.url | relative_url }}" tabindex="-1" aria-hidden="true">
+    {% if article.image and article.image != '' %}<img src="{{ article.image | relative_url }}" alt="" loading="lazy" width="640" height="360">{% else %}<span class="image-placeholder">HXY DAILY</span>{% endif %}
+    {% if category_key == 'fiction' %}<span class="fiction-tag">虚构故事</span>{% endif %}
+  </a>
+  <div class="card-meta"><span class="category-label">{{ site.category_labels[category_key] | default: category_key }}</span><span>{{ article.date | date: '%m.%d' }}</span></div>
+  <h3><a href="{{ article.url | relative_url }}">{{ article.title | escape }}</a></h3>
+  <p>{{ article.summary | escape }}</p>
+  <div class="card-bottom"><span>{{ article.author | default: site.author | escape }}</span><span>{{ article.reading_time | default: 2 }} 分钟阅读 <span aria-hidden="true">↗</span></span></div>
+</article>
