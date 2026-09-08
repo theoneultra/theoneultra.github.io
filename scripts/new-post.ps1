@@ -10,8 +10,8 @@ param(
   [ValidatePattern('(?-i)^[a-z0-9]+(?:-[a-z0-9]+)*$')]
   [string]$Slug,
 
-  [ValidateSet('physics', 'technology', 'life', 'fiction')]
-  [string]$Category = 'physics',
+  [ValidateSet('science', 'life', 'review', 'fiction')]
+  [string]$Category = 'science',
 
   [switch]$Open
 )

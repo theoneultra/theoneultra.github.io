@@ -2,7 +2,7 @@
 layout: post
 title: "在这里填写标题"
 date: 2026-09-06 09:00:00 +0800
-category: physics
+category: science
 tags: []
 image: ""
 image_alt: "在这里描述封面画面"

@@ -28,16 +28,13 @@
     </div>
     <div class="masthead">
       <div class="masthead-note">从宇宙的尺度<br>到日常的细节。</div>
-      <a class="brand" href="{{ '/' | relative_url }}" aria-label="HXY DAILY 亦弦日报首页"><span class="wordmark">HXY<span class="brand-dot">.</span>DAILY</span><span class="brand-caption">亦弦日报 <span>PHYSICS · TECHNOLOGY · LIFE</span></span></a>
+      <a class="brand" href="{{ '/' | relative_url }}" aria-label="HXY DAILY 亦弦日报首页"><span class="wordmark">HXY<span class="brand-dot">.</span>DAILY</span><span class="brand-caption">亦弦日报 <span>SCIENCE · LIFE · REVIEW · FICTION</span></span></a>
       <div class="masthead-note masthead-right">A PERSONAL PERSPECTIVE<br><span>保持好奇，持续记录。</span></div>
     </div>
     <nav class="navigation" aria-label="主导航">
       <div class="nav-links">
         <a href="{{ '/' | relative_url }}" {% if page.home %}class="active" aria-current="page"{% endif %}>首页<span>HOME</span></a>
-        <a href="{{ '/categories/' | relative_url }}#physics" data-nav-category="physics">物理<span>PHYSICS</span></a>
-        <a href="{{ '/categories/' | relative_url }}#technology" data-nav-category="technology">科技<span>TECH</span></a>
-        <a href="{{ '/categories/' | relative_url }}#life" data-nav-category="life">随笔<span>LIFE</span></a>
-        <a href="{{ '/categories/' | relative_url }}#fiction" data-nav-category="fiction">虚构<span>FICTION</span></a>
+        {% for category in site.category_labels %}<a href="{{ '/categories/' | relative_url }}#{{ category[0] }}" data-nav-category="{{ category[0] }}">{{ category[1] }}<span>{{ category[0] | upcase }}</span></a>{% endfor %}
         <a href="{{ '/archive/' | relative_url }}" {% if page.section == 'archive' %}class="active" aria-current="page"{% endif %}>文章归档</a>
       </div>
       <button class="search-trigger" type="button" data-search-open aria-label="搜索文章"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span>搜索</span><kbd>/</kbd></button>

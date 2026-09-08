@@ -1,6 +1,6 @@
 title: HXY DAILY
 title_zh: 亦弦日报
-description: 一份关于物理、科技与日常的个人日报。保持好奇，记录思考。
+description: 一份关于科学、生活、评论与虚构的个人日报。保持好奇，记录思考。
 url: https://theoneultra.github.io
 baseurl: ""
 lang: zh-CN
@@ -19,10 +19,14 @@ kramdown:
   syntax_highlighter: rouge
 
 category_labels:
-  physics: 物理
-  technology: 科技
-  life: 随笔
+  science: 科学
+  life: 生活
+  review: 评论
   fiction: 虚构
+
+carousel:
+  max_posts: 9
+  interval_seconds: 5
 
 defaults:
   - scope:

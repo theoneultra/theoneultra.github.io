@@ -111,12 +111,12 @@
       "type": "pickString",
       "description": "栏目",
       "options": [
-        { "label": "物理", "value": "physics" },
-        { "label": "科技", "value": "technology" },
-        { "label": "随笔", "value": "life" },
+        { "label": "科学", "value": "science" },
+        { "label": "生活", "value": "life" },
+        { "label": "评论", "value": "review" },
         { "label": "虚构", "value": "fiction" }
       ],
-      "default": "physics"
+      "default": "science"
     }
   ]
 }

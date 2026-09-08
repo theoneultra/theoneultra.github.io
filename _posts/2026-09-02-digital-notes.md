@@ -2,7 +2,7 @@
 layout: post
 title: "一份好笔记，应该在下次需要时找到你"
 date: 2026-09-02 09:00:00 +0800
-category: technology
+category: review
 tags: [数字生活, 笔记, 写作]
 author: Huang Yixian
 image: /assets/images/notebook.jpg

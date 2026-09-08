@@ -51,7 +51,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/new-post.ps1 -Title 
 layout: post
 title: "我的第一篇文章"
 date: 2026-09-06 09:00:00 +0800
-category: physics
+category: science
 tags: [宇宙, 观测]
 image: /assets/images/2026/09/my-cover.webp
 image_alt: "深蓝天空中的银河"
@@ -65,12 +65,12 @@ summary: "用一两句话说明这篇文章的内容。"
 
 | 字段 | 填写方式 |
 | --- | --- |
-| `category` | `physics` 物理、`technology` 科技、`life` 随笔、`fiction` 虚构 |
+| `category` | `science` 科学、`life` 生活、`review` 评论、`fiction` 虚构 |
 | `image` | 封面的站内路径，以 `/assets/images/` 开头；图片文件需实际存在 |
 | `image_alt` | 简短描述图片内容，供屏幕阅读器和图片加载失败时使用 |
 | `image_caption` | 可选的图片说明或来源；AI 示意图请明确注明 |
 | `reading_time` | 预计阅读分钟数，例如 `2` |
-| `featured` | `true` 加入首页精选轮播；建议同时保留 3–5 篇 |
+| `featured` | `true` 加入首页精选轮播，按日期从新到旧展示，最多 9 篇 |
 | `breaking` | `true` 加入首页快讯栏 |
 | `published` | `false` 为草稿，准备好后改成 `true` |
 | `summary` | 首页卡片和精选区域展示的摘要 |
@@ -83,6 +83,46 @@ summary: "用一两句话说明这篇文章的内容。"
 ```
 
 在第二条 `---` 后写 Markdown 正文，可以使用标题、列表、引用、链接、表格和代码块。虚构创作请选择 `fiction` 栏目，并在开头注明虚构性质。
+
+## 更换首页轮播文章与间隔
+
+在 `_posts/` 打开想展示的 Markdown 文件，将开头的 `featured` 改成 `true`。改成 `false` 就会退出精选轮播。文章还需要已发布，且日期不晚于当前时间。
+
+```yaml
+featured: true
+published: true
+```
+
+轮播最多展示最新的 **9 篇精选文章**。例如仅有 3 篇设为 `featured: true`，页面就只轮播这 3 篇；要显示 9 篇，需要有 9 篇已发布文章开启精选。超过 9 篇时按日期取最新 9 篇。若完全没有精选文章，则使用最新的最多 9 篇文章。
+
+数量与自动滑动间隔在根目录 `_config.yml` 中设置：
+
+```yaml
+carousel:
+  max_posts: 9          # 1–9 篇
+  interval_seconds: 5  # 每 5 秒滑动一次，可改成 8 或 10 等正数
+```
+
+修改 `_config.yml` 后重新启动本地预览。鼠标停留在轮播区、键盘正在操作轮播或切换到其他浏览器标签页时会暂停；也可以使用暂停按钮、左右箭头、下方指示条或在手机上横向滑动。系统开启“减少动态效果”时，默认关闭自动播放与滑动动画。
+
+## 修改文章分类
+
+每篇文章的分类在它自身的 Markdown 文件开头修改，例如：
+
+```yaml
+category: review
+```
+
+| 显示栏目 | `category` 的值 |
+| --- | --- |
+| 科学 | `science` |
+| 生活 | `life` |
+| 评论 | `review` |
+| 虚构 | `fiction` |
+
+全站栏目名称在 `_config.yml` 的 `category_labels` 中统一设置，导航、首页筛选、分类页与文章标签自动读取它。VS Code 的“日报：新建文章”任务也已提供这四个选项。
+
+当前原有物理笔记归入科学，AI 与数字笔记两篇观点文章归入评论，生活与虚构文章保留原类。文章网址包含分类，修改分类后应使用新生成的网址。
 
 ## 预览与发布
 

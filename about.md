@@ -4,7 +4,7 @@ title: 关于日报
 permalink: /about/
 ---
 <div class="about-page">
-<header class="page-heading"><span class="eyebrow">HELLO, CURIOUS MIND.</span><h1>世界很大，<br>好奇心也是。</h1><p>一份关于物理、科技和日常生活的个人刊物。</p></header>
+<header class="page-heading"><span class="eyebrow">HELLO, CURIOUS MIND.</span><h1>世界很大，<br>好奇心也是。</h1><p>一份关于科学、生活、评论与虚构的个人刊物。</p></header>
 <div class="about-prose" markdown="1">
 ## 你好，我是 Huang Yixian。
 
@@ -16,9 +16,9 @@ permalink: /about/
 
 ## 在这里，你会读到
 
-- **物理 / Physics**：围绕自然规律的知识笔记与问题。
-- **科技 / Technology**：关于工具、人工智能和数字生活的思考。
-- **随笔 / Life**：日常记录、阅读片段与个人感受。
+- **科学 / Science**：围绕自然规律、科学与技术的知识笔记和问题。
+- **生活 / Life**：日常记录、阅读片段与个人感受。
+- **评论 / Review**：对书籍、作品、工具与社会议题的观点和评述。
 - **虚构 / Fiction**：让想象走远一点的故事，均明确标注为虚构。
 
 ## 关于内容

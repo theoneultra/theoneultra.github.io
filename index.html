@@ -1,20 +1,21 @@
 ---
 layout: default
 home: true
-description: "亦弦日报：从宇宙的尺度到日常的细节。关于物理、科技、生活的个人观察与独立书写。"
+description: "亦弦日报：从宇宙的尺度到日常的细节。关于科学、生活、评论与虚构的个人观察与独立书写。"
 ---
-{% assign featured = site.posts | where: 'featured', true %}
-{% if featured.size == 0 %}{% assign featured = site.posts | slice: 0, 3 %}{% endif %}
+{% assign carousel_limit = site.carousel.max_posts | default: 9 | at_least: 1 | at_most: 9 %}
+{% assign featured = site.posts | where: 'featured', true | slice: 0, carousel_limit %}
+{% if featured.size == 0 %}{% assign featured = site.posts | slice: 0, carousel_limit %}{% endif %}
 {% assign breaking = site.posts | where: 'breaking', true | first %}
 {% if breaking %}<div class="breaking-strip"><span class="breaking-label">编辑精选</span><a href="{{ breaking.url | relative_url }}">{{ breaking.title | escape }} <span aria-hidden="true">↗</span></a><span class="breaking-note">慢一点阅读，多一点思考。</span></div>{% endif %}
 <section class="front-page" aria-labelledby="front-page-heading">
   <div class="section-heading front-heading"><h1 id="front-page-heading">今日视野 <span>THE FRONT PAGE</span></h1><span class="edition-number">一份观察世界的切片 <span aria-hidden="true">✳</span></span></div>
   <div class="lead-grid">
     {% if featured.size > 0 %}
-    <div class="carousel" data-carousel role="region" aria-roledescription="轮播" aria-label="精选文章">
+    <div class="carousel" data-carousel data-interval="{{ site.carousel.interval_seconds | default: 5 | times: 1000 }}" role="region" aria-roledescription="轮播" aria-label="精选文章">
       <div class="slides">
-        {% for post in featured limit: 5 %}{% assign category_key = post.categories | first %}
-        <article class="slide{% if forloop.first %} is-active{% endif %}" data-slide {% unless forloop.first %}hidden{% endunless %} role="group" aria-roledescription="幻灯片" aria-label="{{ forloop.index }} / {{ featured.size | at_most: 5 }}">
+        {% for post in featured %}{% assign category_key = post.categories | first %}
+        <article class="slide{% if forloop.first %} is-active{% endif %}" data-slide {% unless forloop.first %}hidden inert aria-hidden="true"{% endunless %} role="group" aria-roledescription="幻灯片" aria-label="{{ forloop.index }} / {{ featured.size }}">
           {% if post.image and post.image != '' %}<img class="hero-image" src="{{ post.image | relative_url }}" alt="{{ post.image_alt | default: post.title | escape }}" width="1672" height="941" {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>{% endif %}
           <div class="slide-shade"></div>
           <div class="hero-topline"><span>封面故事 <span> / {{ site.category_labels[category_key] | default: category_key }}</span></span><span class="hero-star" aria-hidden="true">✳</span></div>
@@ -23,8 +24,8 @@ description: "亦弦日报：从宇宙的尺度到日常的细节。关于物理
         {% endfor %}
       </div>
       <div class="carousel-controls" {% if featured.size < 2 %}hidden{% endif %}>
-        <span class="carousel-count"><strong data-slide-current>01</strong> / {{ featured.size | at_most: 5 | prepend: '0' }}</span>
-        <div class="carousel-dots" aria-label="选择精选文章">{% for post in featured limit: 5 %}<button type="button" data-slide-to="{{ forloop.index0 }}" aria-label="显示第 {{ forloop.index }} 篇：{{ post.title | escape }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"></button>{% endfor %}</div>
+        <span class="carousel-count"><strong data-slide-current>01</strong> / {{ featured.size | prepend: '0' }}</span>
+        <div class="carousel-dots" aria-label="选择精选文章">{% for post in featured %}<button type="button" data-slide-to="{{ forloop.index0 }}" aria-label="显示第 {{ forloop.index }} 篇：{{ post.title | escape }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"></button>{% endfor %}</div>
         <div class="carousel-arrows"><button type="button" data-carousel-pause aria-label="暂停自动轮播">Ⅱ</button><button type="button" data-carousel-prev aria-label="上一篇精选">←</button><button type="button" data-carousel-next aria-label="下一篇精选">→</button></div>
       </div>
     </div>
@@ -50,5 +51,5 @@ description: "亦弦日报：从宇宙的尺度到日常的细节。关于物理
     <a class="rss-card" href="{{ '/feed.xml' | relative_url }}"><span class="rss-icon" aria-hidden="true">◔</span><div><strong>让好奇心，定期抵达。</strong><span>通过 RSS 订阅最新文章</span></div><span aria-hidden="true">↗</span></a>
   </aside>
 </div>
-<section class="category-digest" aria-label="分类速览">{% assign digest_keys = 'physics,technology,life' | split: ',' %}{% for key in digest_keys %}<div class="digest-column"><div class="small-section-heading"><h2>{{ site.category_labels[key] }} <span>{{ key | upcase }}</span></h2><a href="{{ '/categories/' | relative_url }}#{{ key }}" aria-label="查看全部{{ site.category_labels[key] }}文章">↗</a></div>{% for post in site.categories[key] limit: 2 %}<a class="digest-story" href="{{ post.url | relative_url }}"><span>{{ post.date | date: '%m.%d' }}</span><h3>{{ post.title | escape }}</h3></a>{% endfor %}</div>{% endfor %}</section>
+<section class="category-digest" aria-label="分类速览">{% assign digest_keys = 'science,life,review' | split: ',' %}{% for key in digest_keys %}<div class="digest-column"><div class="small-section-heading"><h2>{{ site.category_labels[key] }} <span>{{ key | upcase }}</span></h2><a href="{{ '/categories/' | relative_url }}#{{ key }}" aria-label="查看全部{{ site.category_labels[key] }}文章">↗</a></div>{% for post in site.categories[key] limit: 2 %}<a class="digest-story" href="{{ post.url | relative_url }}"><span>{{ post.date | date: '%m.%d' }}</span><h3>{{ post.title | escape }}</h3></a>{% endfor %}</div>{% endfor %}</section>
 <div class="closing-note"><span aria-hidden="true">✳</span><p>把问题留给世界，把观察写成日常。</p><span>STAY CURIOUS.</span></div>

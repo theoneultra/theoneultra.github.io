@@ -381,9 +381,6 @@ input:focus-visible {
   color: #fff;
   isolation: isolate;
 }
-.slide.is-active {
-  animation: reveal-slide 0.65s ease both;
-}
 .hero-image,
 .slide-shade {
   position: absolute;
@@ -1425,14 +1422,6 @@ input:focus-visible {
   padding: 2px 4px;
   margin-right: 5px;
 }
-@keyframes reveal-slide {
-  from {
-    opacity: 0.35;
-  }
-  to {
-    opacity: 1;
-  }
-}
 @media (min-width: 1550px) {
   .slides {
     aspect-ratio: 1.82;
@@ -1741,7 +1730,23 @@ input:focus-visible {
     object-position: 58% center;
   }
   .carousel-controls {
-    height: 48px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 40px 30px;
+    gap: 0 16px;
+    height: 80px;
+  }
+  .carousel-dots {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: none;
+  }
+  .carousel-dots button {
+    min-width: 20px;
+  }
+  .carousel-arrows {
+    grid-column: 2;
+    grid-row: 1;
   }
   .edit-column {
     display: grid;

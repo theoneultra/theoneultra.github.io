@@ -4,6 +4,6 @@ title: 栏目
 permalink: /categories/
 section: categories
 ---
-<header class="page-heading"><span class="eyebrow">EXPLORE BY TOPIC</span><h1>循着好奇，找到方向。</h1><p>物理的追问，科技的想象，日常的片刻，还有一些自由生长的故事。</p></header>
+<header class="page-heading"><span class="eyebrow">EXPLORE BY TOPIC</span><h1>循着好奇，找到方向。</h1><p>科学的追问，生活的片刻，独立的评论，还有一些自由生长的故事。</p></header>
 <nav class="category-jumps" aria-label="跳至栏目">{% for category in site.category_labels %}{% assign category_key = category[0] %}{% assign category_posts = site.categories[category_key] %}<a href="#{{ category_key }}">{{ category[1] }} <span>{{ category_posts.size | default: 0 }}</span> ↘</a>{% endfor %}</nav>
 {% for category in site.category_labels %}{% assign category_key = category[0] %}{% assign category_posts = site.categories[category_key] %}<section class="category-section" id="{{ category_key }}"><div class="section-heading"><h2>{{ category[1] }} <span>{{ category_key | upcase }}</span></h2><span class="muted">{{ category_posts.size | default: 0 }} 篇文章</span></div><div class="news-grid">{% for post in category_posts %}{% include card.html post=post %}{% else %}<p class="empty-state">新的观察正在路上。</p>{% endfor %}</div></section>{% endfor %}
